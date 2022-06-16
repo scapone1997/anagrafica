@@ -1,0 +1,10 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:anagrafica
+  main:
+    log-startup-info: false
+  liquibase:
+    change-log: classpath:db/changelog-master.xml
