@@ -1,16 +1,15 @@
 package universita.anagrafica.controller.rest;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.service.StudenteService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api", produces = "application/json")
 public class StudenteController {
     private final StudenteService studenteService;
 
@@ -18,9 +17,10 @@ public class StudenteController {
         this.studenteService = studenteService;
     }
 
-    @PutMapping("/create-studente")
+    @PostMapping(value = "/create-studente", consumes = "application/json")
     public ResponseEntity<StudenteDTO> createStudente(@RequestBody StudenteDTO studenteDTO){
         studenteService.saveStudente(studenteDTO);
         return ResponseEntity.ok().body(studenteDTO);
     }
+
 }
