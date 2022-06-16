@@ -3,11 +3,28 @@ package universita.anagrafica.domain;
 import lombok.*;
 
 import javax.persistence.Entity;
-
-@Data
-@Entity
-@RequiredArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+import javax.persistence.Id;
+import java.time.LocalDate;
+@Entity(name = "collaboratore")
 public class Collaboratore extends Persona{
+
+    @Id
     private Integer codice;
+
+    public Collaboratore(){
+
+    }
+
+    public Collaboratore(String nome, String cognome, LocalDate dataNascita, Character sesso, String luogoNascita, Integer codice) {
+        super(nome, cognome, dataNascita, sesso, luogoNascita);
+        this.codice = codice;
+    }
+
+    public Integer getCodice() {
+        return codice;
+    }
+
+    public void setCodice(Integer codice) {
+        this.codice = codice;
+    }
 }
