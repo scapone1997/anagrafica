@@ -1,4 +1,6 @@
-
 spring:
+  profiles:
+    active: h2
+    default: none
   liquibase:
     change-log: classpath:db/changelog-master.xml
