@@ -1,6 +1,7 @@
 package universita.anagrafica.controller.rest;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.service.StudenteService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -22,6 +24,18 @@ public class StudenteController {
     @GetMapping(value = "/studenti")
     public ResponseEntity<List<StudenteDTO>> allStudents(){
         List<StudenteDTO> list = studenteService.listOfStudenti();
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/studenti-after/{matricola}")
+    public ResponseEntity<List<StudenteDTO>> allStudentsAfterMatricola(@PathVariable Integer matricola){
+        List<StudenteDTO> list = studenteService.listOfStudentiAfterMatricola(matricola);
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/studenti-after-datanascita/{date}")
+    public ResponseEntity<List<StudenteDTO>> allStudentsAfterMatricola(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date){
+        List<StudenteDTO> list = studenteService.listOfStudentiAfterDataNascita(date);
         return ResponseEntity.ok().body(list);
     }
 
