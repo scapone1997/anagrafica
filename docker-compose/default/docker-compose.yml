@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+
+  configserver:
+    image: scapone1997/configserver:latest
+    mem_limit: 700m
+    ports:
+      - "8071:8071"
+    networks:
+      - scapone1997
+
+  anagrafica:
+    image: scapone1997/anagrafica:latest
+    mem_limit: 700m
+    ports:
+      - "8080:8080"
+    networks:
+      - scapone1997
+    depends_on:
+      - configserver #Significa che configserver deve essere acceso prima di anagrafica
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+
+networks:
+  scapone1997:
