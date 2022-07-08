@@ -1,9 +1,5 @@
 package universita.anagrafica.dto;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 
 public abstract class PersonaDTO {

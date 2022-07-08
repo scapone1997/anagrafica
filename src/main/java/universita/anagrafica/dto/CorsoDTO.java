@@ -1,21 +1,17 @@
-package universita.anagrafica.domain;
+package universita.anagrafica.dto;
 
-import javax.persistence.*;
+import universita.anagrafica.domain.CorsoDiLaurea;
+import universita.anagrafica.domain.Professore;
 
-@Entity(name = "corso")
-public class Corso {
 
-    @Id
+public class CorsoDTO {
+
     private Integer id;
     private String nome;
     private Boolean obbligatorio;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "professore", referencedColumnName = "matricola")
     private Professore professore;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corso_di_laurea", referencedColumnName = "id")
     private CorsoDiLaurea corsoDiLaurea;
 
     public Integer getId() {

@@ -1,18 +1,13 @@
-package universita.anagrafica.domain;
+package universita.anagrafica.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import universita.anagrafica.domain.Corso;
+
 import java.util.Set;
 
-@Entity(name = "corso_di_laurea")
-public class CorsoDiLaurea {
-
-    @Id
+public class CorsoDiLaureaDTO {
     private Integer id;
     private String nome;
 
-    @OneToMany(mappedBy = "corsoDiLaurea")
     private Set<Corso> corsi;
 
     public Integer getId() {

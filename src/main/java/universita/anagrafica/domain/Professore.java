@@ -1,11 +1,10 @@
 package universita.anagrafica.domain;
 
 
-import liquibase.pro.packaged.H;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "professore")

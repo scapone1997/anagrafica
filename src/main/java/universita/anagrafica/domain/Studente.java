@@ -1,10 +1,8 @@
 package universita.anagrafica.domain;
 
-import liquibase.pro.packaged.H;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.HashSet;
 
 @Entity(name = "studente")
 public class Studente extends Persona{
