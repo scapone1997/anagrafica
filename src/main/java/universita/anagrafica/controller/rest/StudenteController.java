@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
+import universita.anagrafica.kafka.Producer;
 import universita.anagrafica.service.StudenteService;
 
 import java.time.LocalDate;
