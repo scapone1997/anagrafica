@@ -1,13 +1,11 @@
 package universita.anagrafica.domain;
 
-import antlr.StringUtils;
-import lombok.*;
+import liquibase.pro.packaged.H;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+
 @Entity(name = "studente")
 public class Studente extends Persona{
 
@@ -30,6 +28,7 @@ public class Studente extends Persona{
     public void setMatricola(Integer matricola) {
         this.matricola = matricola;
     }
+
 
     @Override
     public String toString() {

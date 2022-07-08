@@ -1,19 +1,21 @@
 package universita.anagrafica.domain;
 
-import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
+import liquibase.pro.packaged.H;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "professore")
 public class Professore extends Persona{
     @Id
     private Integer matricola;
 
+
+    @OneToMany(mappedBy = "professore")
+    private Set<Corso> corsi;
 
     public Professore(){
 
@@ -30,4 +32,5 @@ public class Professore extends Persona{
     public void setMatricola(Integer matricola) {
         this.matricola = matricola;
     }
+
 }
