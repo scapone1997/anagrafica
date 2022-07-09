@@ -96,9 +96,15 @@
             <column name="nome" type="varchar(100)">
                 <constraints nullable="false"></constraints>
             </column>
-            <column name="professore" type="integer"></column>
-            <column name="corso_di_laurea" type="integer"></column>
-            <column name="obbligatorio" type="boolean" ></column>
+            <column name="professore" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="corso_di_laurea" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name = "obbligatorio" type = "boolean">
+                <constraints nullable="false"></constraints>
+            </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="corso"
                                  baseColumnNames="professore"

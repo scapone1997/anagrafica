@@ -2,9 +2,11 @@ package universita.anagrafica.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
-@Entity(name = "studente")
+@Entity
+@Table(name = "studente")
 public class Studente extends Persona{
 
     @Id

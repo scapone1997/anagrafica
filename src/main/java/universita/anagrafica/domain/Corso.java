@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-@Entity(name = "corso")
+@Entity
+@Table(name = "corso")
 public class Corso {
 
     @Id
@@ -12,10 +13,12 @@ public class Corso {
     private String nome;
     private Boolean obbligatorio;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "professore")
     private Professore professore;
 
-    @ManyToOne()
+    @ManyToOne
+    @JoinColumn(name = "corso_di_laurea")
     private CorsoDiLaurea corsoDiLaurea;
 
     public Integer getId() {

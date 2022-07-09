@@ -4,10 +4,12 @@ package universita.anagrafica.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Entity(name = "professore")
+@Entity
+@Table(name = "professore")
 public class Professore extends Persona{
     @Id
     private Integer matricola;
