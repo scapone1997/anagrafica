@@ -2,8 +2,6 @@ package universita.anagrafica.controller.rest;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import universita.anagrafica.domain.CorsoDiLaurea;
-import universita.anagrafica.dto.CorsoDTO;
 import universita.anagrafica.dto.CorsoDiLaureaDTO;
 import universita.anagrafica.service.CorsoDiLaureaService;
 

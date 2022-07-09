@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import universita.anagrafica.domain.Studente;
+import universita.anagrafica.mapper.domain.Studente;
 
 @Component
 @Slf4j

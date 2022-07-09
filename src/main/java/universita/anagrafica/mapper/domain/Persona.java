@@ -1,4 +1,4 @@
-package universita.anagrafica.domain;
+package universita.anagrafica.mapper.domain;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 

@@ -2,7 +2,7 @@ package universita.anagrafica.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import universita.anagrafica.domain.Collaboratore;
+import universita.anagrafica.mapper.domain.Collaboratore;
 import universita.anagrafica.dto.CollaboratoreDTO;
 
 @Mapper(componentModel = "spring")

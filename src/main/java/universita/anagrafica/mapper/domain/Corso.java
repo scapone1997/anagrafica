@@ -1,6 +1,4 @@
-package universita.anagrafica.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package universita.anagrafica.mapper.domain;
 
 import javax.persistence.*;
 
