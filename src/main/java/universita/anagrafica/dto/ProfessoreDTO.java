@@ -1,10 +1,7 @@
 package universita.anagrafica.dto;
 
-import lombok.Data;
-
 import java.time.LocalDate;
 
-@Data
 public class ProfessoreDTO extends PersonaDTO {
     private Integer matricola;
 

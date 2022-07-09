@@ -1,10 +1,7 @@
 package universita.anagrafica.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import universita.anagrafica.domain.Corso;
-import universita.anagrafica.domain.CorsoDiLaurea;
-import universita.anagrafica.domain.Professore;
 import universita.anagrafica.dto.CorsoDTO;
 import universita.anagrafica.mapper.CorsoMapper;
 import universita.anagrafica.repository.CorsoDiLaureaRepository;
@@ -12,7 +9,6 @@ import universita.anagrafica.repository.CorsoRepository;
 import universita.anagrafica.repository.ProfessoreRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

@@ -14,7 +14,6 @@ public class Producer {
 
     @Autowired
     KafkaTemplate<Integer, String> kafkaTemplate;
-
     @Autowired
     ObjectMapper objectMapper;
 

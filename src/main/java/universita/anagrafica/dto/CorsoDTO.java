@@ -1,16 +1,11 @@
 package universita.anagrafica.dto;
 
-
-
 public class CorsoDTO {
 
     private Integer id;
     private String nome;
     private Boolean obbligatorio;
-
     private Integer professore;
-
-
     private Integer corsoDiLaurea;
 
     public Integer getId() {
