@@ -1,7 +1,5 @@
 package universita.anagrafica.dto;
 
-import universita.anagrafica.domain.CorsoDiLaurea;
-import universita.anagrafica.domain.Professore;
 
 
 public class CorsoDTO {
@@ -13,7 +11,7 @@ public class CorsoDTO {
     private Integer professoreMatricola;
 
 
-    private Integer corsoDiLaureaId;
+    private Integer corsoDiLaurea;
 
     public Integer getId() {
         return id;
@@ -47,11 +45,11 @@ public class CorsoDTO {
         this.professoreMatricola = professoreMatricola;
     }
 
-    public Integer getCorsoDiLaureaId() {
-        return corsoDiLaureaId;
+    public Integer getCorsoDiLaurea() {
+        return corsoDiLaurea;
     }
 
-    public void setCorsoDiLaureaId(Integer corsoDiLaureaId) {
-        this.corsoDiLaureaId = corsoDiLaureaId;
+    public void setCorsoDiLaurea(Integer corsoDiLaurea) {
+        this.corsoDiLaurea = corsoDiLaurea;
     }
 }

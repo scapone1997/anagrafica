@@ -43,7 +43,7 @@ public class CorsoService {
     public void saveCorso(CorsoDTO corsoDTO) {
         Corso corso = corsoMapper.toEntity(corsoDTO);
         Optional<Professore> professore = professoreRepository.findById(corsoDTO.getProfessoreMatricola());
-        Optional<CorsoDiLaurea> corsoDiLaurea = corsoDiLaureaRepository.findById(corsoDTO.getCorsoDiLaureaId());
+        Optional<CorsoDiLaurea> corsoDiLaurea = corsoDiLaureaRepository.findById(corsoDTO.getCorsoDiLaurea());
         if(professore.isPresent() && corsoDiLaurea.isPresent()){
             corso.setProfessore(professore.get());
             corso.setCorsoDiLaurea(corsoDiLaurea.get());

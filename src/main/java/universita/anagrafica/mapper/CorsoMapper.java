@@ -10,11 +10,11 @@ import universita.anagrafica.dto.CorsoDTO;
 public interface CorsoMapper extends EntityMapper<CorsoDTO, Corso>{
 
     @Mapping(source="professore.matricola", target = "professoreMatricola")
-    @Mapping(source="corsoDiLaurea.id", target = "corsoDiLaureaId")
+    @Mapping(source="corsoDiLaurea.id", target = "corsoDiLaurea")
     CorsoDTO toDto(Corso corso);
 
     @Mapping(source = "professoreMatricola", target = "professore")
-    @Mapping(source = "corsoDiLaureaId", target = "corsoDiLaurea")
+    @Mapping(source = "corsoDiLaurea", target = "corsoDiLaurea")
     Corso toEntity(CorsoDTO corsoDTO);
 
     default Corso fromId(Integer id){
