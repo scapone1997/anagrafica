@@ -1,4 +1,4 @@
-package universita.anagrafica.mapper.domain;
+package universita.anagrafica.domain;
 
 import javax.persistence.*;
 

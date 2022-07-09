@@ -1,7 +1,7 @@
 package universita.anagrafica.mapper;
 
 import org.mapstruct.Mapper;
-import universita.anagrafica.mapper.domain.CorsoDiLaurea;
+import universita.anagrafica.domain.CorsoDiLaurea;
 import universita.anagrafica.dto.CorsoDiLaureaDTO;
 
 @Mapper(componentModel = "spring")

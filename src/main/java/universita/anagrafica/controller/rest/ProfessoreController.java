@@ -3,7 +3,6 @@ package universita.anagrafica.controller.rest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import universita.anagrafica.dto.ProfessoreDTO;
-import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.service.ProfessoreService;
 
 import java.util.List;

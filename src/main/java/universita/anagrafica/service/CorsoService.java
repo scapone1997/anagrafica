@@ -1,7 +1,7 @@
 package universita.anagrafica.service;
 
 import org.springframework.stereotype.Service;
-import universita.anagrafica.mapper.domain.Corso;
+import universita.anagrafica.domain.Corso;
 import universita.anagrafica.dto.CorsoDTO;
 import universita.anagrafica.mapper.CorsoMapper;
 import universita.anagrafica.repository.CorsoDiLaureaRepository;

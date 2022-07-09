@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import universita.anagrafica.mapper.domain.Studente;
+import universita.anagrafica.domain.Studente;
 
 @Component
 @Slf4j
@@ -14,7 +14,6 @@ public class Producer {
 
     @Autowired
     KafkaTemplate<Integer, String> kafkaTemplate;
-
     @Autowired
     ObjectMapper objectMapper;
 
