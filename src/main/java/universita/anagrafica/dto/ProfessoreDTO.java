@@ -1,9 +1,6 @@
 package universita.anagrafica.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import universita.anagrafica.domain.Persona;
 
 import java.time.LocalDate;
 

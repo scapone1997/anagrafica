@@ -77,4 +77,45 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="tableCorsoDiLaurea" author="Capone.s">
+        <createTable tableName="corso_di_laurea">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="nome" type="varchar(100)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="tableCorso" author="Capone.s">
+        <createTable tableName="corso">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="nome" type="varchar(100)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="professore" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="corso_di_laurea" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name = "obbligatorio" type = "boolean">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="corso"
+                                 baseColumnNames="professore"
+                                 constraintName="fk_pm"
+                                 referencedTableName="professore"
+                                 referencedColumnNames="matricola"/>
+        <addForeignKeyConstraint baseTableName="corso"
+                                 baseColumnNames="corso_di_laurea"
+                                 constraintName="fk_cdl"
+                                 referencedTableName="corso_di_laurea"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
 </databaseChangeLog>

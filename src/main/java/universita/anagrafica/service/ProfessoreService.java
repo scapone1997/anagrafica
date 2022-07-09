@@ -5,6 +5,9 @@ import universita.anagrafica.dto.ProfessoreDTO;
 import universita.anagrafica.mapper.ProfessoreMapper;
 import universita.anagrafica.repository.ProfessoreRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProfessoreService {
 
@@ -18,6 +21,14 @@ public class ProfessoreService {
     }
 
     public void saveProfessore(ProfessoreDTO professoreDTO) {
-        professoreRepository.save(professoreMapper.professoreDTOToProfessore(professoreDTO));
+        professoreRepository.save(professoreMapper.toEntity(professoreDTO));
+    }
+
+    public List<ProfessoreDTO> listOfProfessori() {
+        return professoreRepository
+                .findAll()
+                .stream()
+                .map(professore -> professoreMapper.toDto(professore))
+                .collect(Collectors.toList());
     }
 }

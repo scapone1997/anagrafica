@@ -1,19 +1,18 @@
 package universita.anagrafica.domain;
 
-import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Set;
 
-@Entity(name = "professore")
+@Entity
+@Table(name = "professore")
 public class Professore extends Persona{
     @Id
     private Integer matricola;
-
 
     public Professore(){
 
@@ -30,4 +29,5 @@ public class Professore extends Persona{
     public void setMatricola(Integer matricola) {
         this.matricola = matricola;
     }
+
 }

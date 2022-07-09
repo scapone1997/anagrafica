@@ -1,14 +1,12 @@
 package universita.anagrafica.domain;
 
-import antlr.StringUtils;
-import lombok.*;
-
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
-@Entity(name = "studente")
+
+@Entity
+@Table(name = "studente")
 public class Studente extends Persona{
 
     @Id
@@ -30,6 +28,7 @@ public class Studente extends Persona{
     public void setMatricola(Integer matricola) {
         this.matricola = matricola;
     }
+
 
     @Override
     public String toString() {
