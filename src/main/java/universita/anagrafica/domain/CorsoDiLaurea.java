@@ -12,8 +12,6 @@ public class CorsoDiLaurea {
     private Integer id;
     private String nome;
 
-    @OneToMany(mappedBy = "corsoDiLaurea")
-    private Set<Corso> corsi;
 
     public Integer getId() {
         return id;
@@ -29,13 +27,5 @@ public class CorsoDiLaurea {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Set<Corso> getCorsi() {
-        return corsi;
-    }
-
-    public void setCorsi(Set<Corso> corsi) {
-        this.corsi = corsi;
     }
 }

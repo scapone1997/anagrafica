@@ -12,10 +12,6 @@ public class Professore extends Persona{
     @Id
     private Integer matricola;
 
-
-    @OneToMany(mappedBy = "professore")
-    private Set<Corso> corsi;
-
     public Professore(){
 
     }

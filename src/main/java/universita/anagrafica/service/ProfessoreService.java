@@ -21,14 +21,14 @@ public class ProfessoreService {
     }
 
     public void saveProfessore(ProfessoreDTO professoreDTO) {
-        professoreRepository.save(professoreMapper.professoreDTOToProfessore(professoreDTO));
+        professoreRepository.save(professoreMapper.toEntity(professoreDTO));
     }
 
     public List<ProfessoreDTO> listOfProfessori() {
         return professoreRepository
                 .findAll()
                 .stream()
-                .map(professore -> professoreMapper.professoreToProfessoreDTO(professore))
+                .map(professore -> professoreMapper.toDto(professore))
                 .collect(Collectors.toList());
     }
 }

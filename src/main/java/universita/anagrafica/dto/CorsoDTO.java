@@ -10,9 +10,10 @@ public class CorsoDTO {
     private String nome;
     private Boolean obbligatorio;
 
-    private Professore professore;
+    private Integer professoreMatricola;
 
-    private CorsoDiLaurea corsoDiLaurea;
+
+    private Integer corsoDiLaureaId;
 
     public Integer getId() {
         return id;
@@ -38,19 +39,19 @@ public class CorsoDTO {
         this.obbligatorio = obbligatorio;
     }
 
-    public Professore getProfessore() {
-        return professore;
+    public Integer getProfessoreMatricola() {
+        return professoreMatricola;
     }
 
-    public void setProfessore(Professore professore) {
-        this.professore = professore;
+    public void setProfessoreMatricola(Integer professoreMatricola) {
+        this.professoreMatricola = professoreMatricola;
     }
 
-    public CorsoDiLaurea getCorsoDiLaurea() {
-        return corsoDiLaurea;
+    public Integer getCorsoDiLaureaId() {
+        return corsoDiLaureaId;
     }
 
-    public void setCorsoDiLaurea(CorsoDiLaurea corsoDiLaurea) {
-        this.corsoDiLaurea = corsoDiLaurea;
+    public void setCorsoDiLaureaId(Integer corsoDiLaureaId) {
+        this.corsoDiLaureaId = corsoDiLaureaId;
     }
 }

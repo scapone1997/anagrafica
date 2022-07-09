@@ -96,17 +96,18 @@
             <column name="nome" type="varchar(100)">
                 <constraints nullable="false"></constraints>
             </column>
-            <column name="professore" type="integer"></column>
+            <column name="professore_matricola" type="integer"></column>
             <column name="corso_di_laurea" type="integer"></column>
+            <column name="obbligatorio" type="boolean" ></column>
         </createTable>
         <addForeignKeyConstraint baseTableName="corso"
-                                 baseColumnNames="professore"
-                                 constraintName="fk_professore_matricola"
+                                 baseColumnNames="professore_matricola"
+                                 constraintName="fk_pm"
                                  referencedTableName="professore"
                                  referencedColumnNames="matricola"/>
         <addForeignKeyConstraint baseTableName="corso"
                                  baseColumnNames="corso_di_laurea"
-                                 constraintName="fk_corso_corsodilaurea"
+                                 constraintName="fk_cdl"
                                  referencedTableName="corso_di_laurea"
                                  referencedColumnNames="id"/>
     </changeSet>

@@ -24,11 +24,11 @@ public class CorsoDiLaureaService {
         return corsoDiLaureaRepository
                 .findAll()
                 .stream()
-                .map(corsoDiLaurea -> corsoDiLaureaMapper.corsoDiLaureaToCorsoDiLaureaDTO(corsoDiLaurea))
+                .map(corsoDiLaurea -> corsoDiLaureaMapper.toDto(corsoDiLaurea))
                 .collect(Collectors.toList());
     }
 
     public void saveCorsoDiLaurea(CorsoDiLaureaDTO corsoDiLaureaDTO) {
-        corsoDiLaureaRepository.save(corsoDiLaureaMapper.corsoDiLaureaDTOToCorsoDiLaurea(corsoDiLaureaDTO));
+        corsoDiLaureaRepository.save(corsoDiLaureaMapper.toEntity(corsoDiLaureaDTO));
     }
 }

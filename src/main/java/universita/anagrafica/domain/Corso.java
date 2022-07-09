@@ -1,5 +1,7 @@
 package universita.anagrafica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity(name = "corso")
@@ -10,12 +12,10 @@ public class Corso {
     private String nome;
     private Boolean obbligatorio;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "professore", referencedColumnName = "matricola")
+    @ManyToOne()
     private Professore professore;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corso_di_laurea", referencedColumnName = "id")
+    @ManyToOne()
     private CorsoDiLaurea corsoDiLaurea;
 
     public Integer getId() {
