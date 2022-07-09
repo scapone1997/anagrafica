@@ -8,7 +8,7 @@ public class CorsoDTO {
     private String nome;
     private Boolean obbligatorio;
 
-    private Integer professoreMatricola;
+    private Integer professore;
 
 
     private Integer corsoDiLaurea;
@@ -37,12 +37,12 @@ public class CorsoDTO {
         this.obbligatorio = obbligatorio;
     }
 
-    public Integer getProfessoreMatricola() {
-        return professoreMatricola;
+    public Integer getProfessore() {
+        return professore;
     }
 
-    public void setProfessoreMatricola(Integer professoreMatricola) {
-        this.professoreMatricola = professoreMatricola;
+    public void setProfessore(Integer professore) {
+        this.professore = professore;
     }
 
     public Integer getCorsoDiLaurea() {

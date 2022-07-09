@@ -25,12 +25,12 @@ public class CorsoController {
 
     @PostMapping(value = "/create-corso", consumes = "application/json")
     public ResponseEntity<CorsoDTO> createCorso(@RequestBody CorsoDTO corsoDTO){
-        try{
+        //try{
             corsoService.saveCorso(corsoDTO);
-        }catch (Exception e){
-            System.out.println("Lanciata eccezione: " + e.getClass().toString());
-            return ResponseEntity.badRequest().body(corsoDTO);
-        }
+       // }catch (Exception e){
+            //System.out.println("Lanciata eccezione: " + e.);
+            //return ResponseEntity.badRequest().body(null);
+        //}
         return ResponseEntity.ok().body(corsoDTO);
     }
 }
