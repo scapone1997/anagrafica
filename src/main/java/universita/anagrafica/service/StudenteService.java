@@ -26,15 +26,15 @@ public class StudenteService {
     }
 
     public void saveStudente(StudenteDTO studenteDTO) {
-        producer.sendStudente(studenteMapper.studenteDTOToStudente(studenteDTO));
-        studenteRepository.save(studenteMapper.studenteDTOToStudente(studenteDTO));
+        //producer.sendStudente(studenteMapper.toEntity(studenteDTO));
+        studenteRepository.save(studenteMapper.toEntity(studenteDTO));
     }
 
     public List<StudenteDTO> listOfStudenti() {
         return studenteRepository
                 .findAll()
                 .stream()
-                .map(studente -> studenteMapper.studenteToStudenteDTO(studente))
+                .map(studente -> studenteMapper.toDto(studente))
                 .collect(Collectors.toList());
     }
 
@@ -42,7 +42,7 @@ public class StudenteService {
         return studenteRepository
                 .findStudentAfterMatricola(matricola)
                 .stream()
-                .map(studente -> studenteMapper.studenteToStudenteDTO(studente))
+                .map(studente -> studenteMapper.toDto(studente))
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +50,7 @@ public class StudenteService {
         return studenteRepository
                 .findStudenteAfterDataNascita(date)
                 .stream()
-                .map(studente -> studenteMapper.studenteToStudenteDTO(studente))
+                .map(studente -> studenteMapper.toDto(studente))
                 .collect(Collectors.toList());
     }
 }

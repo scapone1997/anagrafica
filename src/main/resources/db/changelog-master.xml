@@ -118,4 +118,10 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="columnCorsoDiLaureInTableStuente" author="">
+        <addColumn tableName="studente">
+            <column name="corso_di_laurea" type="integer"></column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
