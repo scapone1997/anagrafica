@@ -23,9 +23,17 @@ public class CorsoController {
         return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping
+
     @PostMapping(value = "/create-corso", consumes = "application/json")
     public ResponseEntity<CorsoDTO> createCorso(@RequestBody CorsoDTO corsoDTO){
         corsoService.saveCorso(corsoDTO);
         return ResponseEntity.ok().body(corsoDTO);
+    }
+
+    @DeleteMapping(value = "/delete-corso/{id}")
+    public ResponseEntity<String> deleteCorso(@PathVariable Integer id){
+        corsoService.deleteCorso(id);
+        return ResponseEntity.ok().body("Corso " + id + " eliminato. ");
     }
 }

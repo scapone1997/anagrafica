@@ -124,4 +124,12 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="columnAnnoIscrizioneInTableStudente" author="Capone.s">
+        <addColumn tableName="studente">
+            <column name = "anno_accademico_iscrizione" type="varchar(9)" defaultValue="0000/0000">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

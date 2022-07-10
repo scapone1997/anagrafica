@@ -40,4 +40,8 @@ public class CorsoService {
         Corso corso = corsoMapper.toEntity(corsoDTO);
         corsoRepository.save(corso);
     }
+
+    public void deleteCorso(Integer id) {
+        corsoRepository.deleteById(id);
+    }
 }

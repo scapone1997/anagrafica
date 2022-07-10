@@ -1,7 +1,7 @@
 package universita.anagrafica.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.kafka.Producer;
 import universita.anagrafica.mapper.StudenteMapper;
@@ -9,6 +9,7 @@ import universita.anagrafica.repository.StudenteRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,5 +53,17 @@ public class StudenteService {
                 .stream()
                 .map(studente -> studenteMapper.toDto(studente))
                 .collect(Collectors.toList());
+    }
+    public void updateStudente(StudenteDTO studenteDTO, Integer matricola) {
+        if(studenteDTO.getMatricola().equals(matricola)){
+            Optional<Studente> studenteDB = studenteRepository.findById(matricola);
+            if(studenteDB.isPresent()){
+                studenteRepository.save(studenteMapper.toEntity(studenteDTO));
+            }
+        }else throw new RuntimeException("Operazione non consentita.");
+    }
+
+    public void deleteStudente(Integer matricola) {
+        studenteRepository.deleteById(matricola);
     }
 }

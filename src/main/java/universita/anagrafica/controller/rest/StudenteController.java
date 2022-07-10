@@ -43,4 +43,16 @@ public class StudenteController {
         return ResponseEntity.ok().body(studenteDTO);
     }
 
+    @PutMapping(value = "/update-studente/{matricola}", consumes = "application/json")
+    public ResponseEntity<StudenteDTO> updateStudente(@PathVariable Integer matricola, @RequestBody StudenteDTO studenteDTO){
+        studenteService.updateStudente(studenteDTO, matricola);
+        return ResponseEntity.ok().body(studenteDTO);
+    }
+
+    @DeleteMapping(value = "/delete-studente/{matricola}")
+    public ResponseEntity<String> deleteStudente(@PathVariable Integer matricola){
+        studenteService.deleteStudente(matricola);
+        return ResponseEntity.ok().body("Studente " + matricola + " eliminato. ");
+    }
+
 }
