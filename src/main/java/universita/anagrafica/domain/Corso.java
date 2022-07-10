@@ -12,10 +12,6 @@ public class Corso {
     private Boolean obbligatorio;
 
     @ManyToOne
-    @JoinColumn(name = "professore")
-    private Professore professore;
-
-    @ManyToOne
     @JoinColumn(name = "corso_di_laurea")
     private CorsoDiLaurea corsoDiLaurea;
 
@@ -41,14 +37,6 @@ public class Corso {
 
     public void setObbligatorio(Boolean obbligatorio) {
         this.obbligatorio = obbligatorio;
-    }
-
-    public Professore getProfessore() {
-        return professore;
-    }
-
-    public void setProfessore(Professore professore) {
-        this.professore = professore;
     }
 
     public CorsoDiLaurea getCorsoDiLaurea() {

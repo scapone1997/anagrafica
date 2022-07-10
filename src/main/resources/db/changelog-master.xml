@@ -96,9 +96,6 @@
             <column name="nome" type="varchar(100)">
                 <constraints nullable="false"></constraints>
             </column>
-            <column name="professore" type="integer">
-                <constraints nullable="false"></constraints>
-            </column>
             <column name="corso_di_laurea" type="integer">
                 <constraints nullable="false"></constraints>
             </column>
@@ -106,11 +103,6 @@
                 <constraints nullable="false"></constraints>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="corso"
-                                 baseColumnNames="professore"
-                                 constraintName="fk_pm"
-                                 referencedTableName="professore"
-                                 referencedColumnNames="matricola"/>
         <addForeignKeyConstraint baseTableName="corso"
                                  baseColumnNames="corso_di_laurea"
                                  constraintName="fk_cdl"
@@ -130,6 +122,25 @@
                 <constraints nullable="false"/>
             </column>
         </addColumn>
+    </changeSet>
+
+    <changeSet id="tableEdizioneCorso" author="Capone.s">
+        <createTable tableName="edizione_corso">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="anno_accademico" type="varchar(9)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="corso" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="edizione_corso"
+                                 baseColumnNames="corso"
+                                 constraintName="fk_corso"
+                                 referencedTableName="corso"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
 </databaseChangeLog>
