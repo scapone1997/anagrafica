@@ -27,4 +27,10 @@ public class ProfessoreController {
         professoreService.saveProfessore(professoreDTO);
         return ResponseEntity.ok().body(professoreDTO);
     }
+
+    @DeleteMapping(value = "/delete-professore/{matricola}")
+    public ResponseEntity<String> deleteProfessore(@PathVariable Integer matricola){
+        professoreService.deleteProfessore(matricola);
+        return ResponseEntity.ok().body("Professore " + matricola + " eliminato. ");
+    }
 }

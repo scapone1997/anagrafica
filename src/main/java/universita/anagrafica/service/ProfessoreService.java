@@ -31,4 +31,8 @@ public class ProfessoreService {
                 .map(professore -> professoreMapper.toDto(professore))
                 .collect(Collectors.toList());
     }
+
+    public void deleteProfessore(Integer matricola) {
+        professoreRepository.deleteById(matricola);
+    }
 }
