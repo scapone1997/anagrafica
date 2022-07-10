@@ -10,6 +10,9 @@ public class Studente extends Persona{
     @Id
     private Integer matricola;
 
+    @Column(name = "anno_accademico_iscrizione")
+    private String annoAccademicoIscrizione;
+
     @ManyToOne
     @JoinColumn(name = "corso_di_laurea")
     private CorsoDiLaurea corsoDiLaurea;
@@ -38,10 +41,20 @@ public class Studente extends Persona{
         this.corsoDiLaurea = corsoDiLaurea;
     }
 
+    public String getAnnoAccademicoIscrizione() {
+        return annoAccademicoIscrizione;
+    }
+
+    public void setAnnoAccademicoIscrizione(String annoAccademicoIscrizione) {
+        this.annoAccademicoIscrizione = annoAccademicoIscrizione;
+    }
+
     @Override
     public String toString() {
         return "Studente{" +
                 "matricola=" + matricola +
+                ", annoAccademicoIscrizione='" + annoAccademicoIscrizione + '\'' +
+                ", corsoDiLaurea=" + corsoDiLaurea +
                 '}';
     }
 }
