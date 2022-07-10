@@ -141,6 +141,7 @@
                                  constraintName="fk_corso"
                                  referencedTableName="corso"
                                  referencedColumnNames="id"/>
+        <addUniqueConstraint tableName="edizione_corso" columnNames="anno_accademico, corso"/>
     </changeSet>
 
 </databaseChangeLog>

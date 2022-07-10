@@ -1,22 +1,14 @@
-package universita.anagrafica.domain;
+package universita.anagrafica.dto;
 
+import universita.anagrafica.domain.Corso;
 
-import javax.persistence.*;
+public class EdizioneCorsoDTO {
 
-
-@Entity
-@Table(name = "edizione_corso")
-public class EdizioneCorso {
-
-    @Id
     private Integer id;
 
-    @Column(name = "anno_accademico")
     private String annoAccademico;
 
-    @ManyToOne
-    @JoinColumn(name = "corso")
-    private Corso corso;
+    private Integer corso;
 
     public Integer getId() {
         return id;
@@ -34,11 +26,11 @@ public class EdizioneCorso {
         this.annoAccademico = annoAccademico;
     }
 
-    public Corso getCorso() {
+    public Integer getCorso() {
         return corso;
     }
 
-    public void setCorso(Corso corso) {
+    public void setCorso(Integer corso) {
         this.corso = corso;
     }
 }
