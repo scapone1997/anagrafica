@@ -23,8 +23,6 @@ public class CorsoController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping
-
     @PostMapping(value = "/create-corso", consumes = "application/json")
     public ResponseEntity<CorsoDTO> createCorso(@RequestBody CorsoDTO corsoDTO){
         corsoService.saveCorso(corsoDTO);
