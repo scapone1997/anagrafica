@@ -144,4 +144,25 @@
         <addUniqueConstraint tableName="edizione_corso" columnNames="anno_accademico, corso"/>
     </changeSet>
 
+    <changeSet id="tableEdizioneCorsoProfessori" author="Capone.s">
+        <createTable tableName="edizione_corso_professori">
+            <column name="edizione_corso" type="integer">
+                <constraints nullable="false" ></constraints>
+            </column>
+            <column name="professore" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="edizione_corso_professori"
+                                 baseColumnNames="edizione_corso"
+                                 constraintName="fk_ee"
+                                 referencedTableName="edizione_corso"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="edizione_corso_professori"
+                                 baseColumnNames="professore"
+                                 constraintName="fk_pp"
+                                 referencedTableName="professore"
+                                 referencedColumnNames="matricola"/>
+    </changeSet>
+
 </databaseChangeLog>

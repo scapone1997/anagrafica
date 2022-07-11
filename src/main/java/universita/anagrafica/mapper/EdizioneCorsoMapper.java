@@ -5,7 +5,7 @@ import org.mapstruct.Mapping;
 import universita.anagrafica.domain.EdizioneCorso;
 import universita.anagrafica.dto.EdizioneCorsoDTO;
 
-@Mapper(componentModel = "spring", uses = {CorsoMapper.class})
+@Mapper(componentModel = "spring", uses = {CorsoMapper.class, ProfessoreMapper.class})
 public interface EdizioneCorsoMapper {
 
     @Mapping(source="corso.id", target = "corso")

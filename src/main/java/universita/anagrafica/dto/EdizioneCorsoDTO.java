@@ -2,6 +2,9 @@ package universita.anagrafica.dto;
 
 import universita.anagrafica.domain.Corso;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class EdizioneCorsoDTO {
 
     private Integer id;
@@ -9,6 +12,8 @@ public class EdizioneCorsoDTO {
     private String annoAccademico;
 
     private Integer corso;
+
+    private Set<ProfessoreDTO> professore = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -32,5 +37,13 @@ public class EdizioneCorsoDTO {
 
     public void setCorso(Integer corso) {
         this.corso = corso;
+    }
+
+    public Set<ProfessoreDTO> getProfessoreSet() {
+        return professore;
+    }
+
+    public void setProfessoreSet(Set<ProfessoreDTO> professoreSet) {
+        this.professore = professoreSet;
     }
 }
