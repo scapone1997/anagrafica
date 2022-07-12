@@ -1,6 +1,11 @@
 package universita.anagrafica.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -13,12 +18,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "professore")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "matricola")
 public class Professore extends Persona{
     @Id
     private Integer matricola;
 
     @ManyToMany(mappedBy = "professore")
-    private List<EdizioneCorso> edizioneCorso = new ArrayList<>();
+    private Set<EdizioneCorso> edizioneCorso = new HashSet<>();
 
     public Professore(){
 
@@ -36,11 +42,11 @@ public class Professore extends Persona{
         this.matricola = matricola;
     }
 
-    public List<EdizioneCorso> getEdizioneCorso() {
+    public Set<EdizioneCorso> getEdizioneCorso() {
         return edizioneCorso;
     }
 
-    public void setEdizioneCorso(List<EdizioneCorso> edizioneCorso) {
+    public void setEdizioneCorso(Set<EdizioneCorso> edizioneCorso) {
         this.edizioneCorso = edizioneCorso;
     }
 }

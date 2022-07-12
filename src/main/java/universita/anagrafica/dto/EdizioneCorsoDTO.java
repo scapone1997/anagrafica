@@ -15,7 +15,7 @@ public class EdizioneCorsoDTO {
 
     private Integer corso;
 
-    private List<ProfessoreDTO> professore = new ArrayList<>();
+    private Set<ProfessoreDTO> professore = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -41,11 +41,11 @@ public class EdizioneCorsoDTO {
         this.corso = corso;
     }
 
-    public List<ProfessoreDTO> getProfessore() {
+    public Set<ProfessoreDTO> getProfessore() {
         return professore;
     }
 
-    public void setProfessore(List<ProfessoreDTO> professore) {
+    public void setProfessore(Set<ProfessoreDTO> professore) {
         this.professore = professore;
     }
 }
