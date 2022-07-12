@@ -49,6 +49,18 @@ public class StudenteController {
         return ResponseEntity.ok().body(studenteDTO);
     }
 
+    @PutMapping(value = "/update-studente-attivo/{matricola}/", consumes = "application/json")
+    public ResponseEntity<String> attivaStudente(@PathVariable Integer matricola){
+        studenteService.attivaStudente(matricola);
+        return ResponseEntity.ok().body("Studente + " + matricola + " attivato.");
+    }
+
+    @PutMapping(value = "/update-studente-laureato/{matricola}/", consumes = "application/json")
+    public ResponseEntity<String> laureaStudente(@PathVariable Integer matricola){
+        studenteService.laureaStudente(matricola);
+        return ResponseEntity.ok().body("Studente + " + matricola + " attivato.");
+    }
+
     @DeleteMapping(value = "/delete-studente/{matricola}")
     public ResponseEntity<String> deleteStudente(@PathVariable Integer matricola){
         studenteService.deleteStudente(matricola);

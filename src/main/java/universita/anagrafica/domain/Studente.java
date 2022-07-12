@@ -17,6 +17,10 @@ public class Studente extends Persona{
     @JoinColumn(name = "corso_di_laurea")
     private CorsoDiLaurea corsoDiLaurea;
 
+    private Boolean attivo;
+
+    private Boolean laureato;
+
     public Studente(){
 
     }
@@ -47,6 +51,22 @@ public class Studente extends Persona{
 
     public void setAnnoAccademicoIscrizione(String annoAccademicoIscrizione) {
         this.annoAccademicoIscrizione = annoAccademicoIscrizione;
+    }
+
+    public Boolean getAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(Boolean attivo) {
+        this.attivo = attivo;
+    }
+
+    public Boolean getLaureato() {
+        return laureato;
+    }
+
+    public void setLaureato(Boolean laureato) {
+        this.laureato = laureato;
     }
 
     @Override

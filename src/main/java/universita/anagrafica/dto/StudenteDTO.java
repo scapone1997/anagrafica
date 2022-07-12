@@ -9,6 +9,10 @@ public class StudenteDTO extends PersonaDTO{
 
     private String annoAccademicoIscrizione;
 
+    private Boolean attivo;
+
+    private Boolean laureato;
+
     public StudenteDTO(String nome, String cognome, LocalDate dataNascita, Character sesso, String luogoNascita, Integer matricola, String annoAccademicoIscrizione) {
         super(nome, cognome, dataNascita, sesso, luogoNascita);
         this.matricola = matricola;
@@ -37,5 +41,21 @@ public class StudenteDTO extends PersonaDTO{
 
     public void setAnnoAccademicoIscrizione(String annoAccademicoIscrizione) {
         this.annoAccademicoIscrizione = annoAccademicoIscrizione;
+    }
+
+    public Boolean getAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(Boolean attivo) {
+        this.attivo = attivo;
+    }
+
+    public Boolean getLaureato() {
+        return laureato;
+    }
+
+    public void setLaureato(Boolean laureato) {
+        this.laureato = laureato;
     }
 }
