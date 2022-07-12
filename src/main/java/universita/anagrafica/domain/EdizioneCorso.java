@@ -1,20 +1,15 @@
 package universita.anagrafica.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "edizione_corso")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class EdizioneCorso {
+public class EdizioneCorso implements Serializable {
 
     @Id
     private Integer id;
@@ -31,6 +26,7 @@ public class EdizioneCorso {
             name = "edizione_corso_professori",
             joinColumns = @JoinColumn(name = "edizione_corso"),
             inverseJoinColumns = @JoinColumn(name = "professore"))
+    @JsonIgnore
     private Set<Professore> professore = new HashSet<>();
 
     public Integer getId() {

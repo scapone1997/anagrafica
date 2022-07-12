@@ -3,10 +3,11 @@ package universita.anagrafica.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
 @Entity
 @Table(name = "collaboratore")
-public class Collaboratore extends Persona{
+public class Collaboratore extends Persona implements Serializable {
 
     @Id
     private Integer codice;

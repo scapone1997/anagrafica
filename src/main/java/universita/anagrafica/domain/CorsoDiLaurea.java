@@ -2,13 +2,12 @@ package universita.anagrafica.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "corso_di_laurea")
-public class CorsoDiLaurea {
+public class CorsoDiLaurea implements Serializable {
 
     @Id
     private Integer id;

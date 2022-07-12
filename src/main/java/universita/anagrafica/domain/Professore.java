@@ -1,29 +1,25 @@
 package universita.anagrafica.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "professore")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "matricola")
-public class Professore extends Persona{
+public class Professore extends Persona implements Serializable {
     @Id
     private Integer matricola;
 
     @ManyToMany(mappedBy = "professore")
+    @JsonIgnore
     private Set<EdizioneCorso> edizioneCorso = new HashSet<>();
 
     public Professore(){
