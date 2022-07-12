@@ -6,7 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +18,7 @@ public class Professore extends Persona{
     private Integer matricola;
 
     @ManyToMany(mappedBy = "professore")
-    private Set<EdizioneCorso> edizioneCorso = new HashSet<>();
+    private List<EdizioneCorso> edizioneCorso = new ArrayList<>();
 
     public Professore(){
 
@@ -34,11 +36,11 @@ public class Professore extends Persona{
         this.matricola = matricola;
     }
 
-    public Set<EdizioneCorso> getEdizioneCorsoSet() {
+    public List<EdizioneCorso> getEdizioneCorso() {
         return edizioneCorso;
     }
 
-    public void setEdizioneCorsoSet(Set<EdizioneCorso> edizioneCorsoSet) {
-        this.edizioneCorso = edizioneCorsoSet;
+    public void setEdizioneCorso(List<EdizioneCorso> edizioneCorso) {
+        this.edizioneCorso = edizioneCorso;
     }
 }

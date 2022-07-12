@@ -2,7 +2,9 @@ package universita.anagrafica.dto;
 
 import universita.anagrafica.domain.Corso;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class EdizioneCorsoDTO {
@@ -13,7 +15,7 @@ public class EdizioneCorsoDTO {
 
     private Integer corso;
 
-    private Set<ProfessoreDTO> professore = new HashSet<>();
+    private List<ProfessoreDTO> professore = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -39,11 +41,11 @@ public class EdizioneCorsoDTO {
         this.corso = corso;
     }
 
-    public Set<ProfessoreDTO> getProfessoreSet() {
+    public List<ProfessoreDTO> getProfessore() {
         return professore;
     }
 
-    public void setProfessoreSet(Set<ProfessoreDTO> professoreSet) {
-        this.professore = professoreSet;
+    public void setProfessore(List<ProfessoreDTO> professore) {
+        this.professore = professore;
     }
 }

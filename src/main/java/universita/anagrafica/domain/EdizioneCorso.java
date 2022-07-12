@@ -1,7 +1,9 @@
 package universita.anagrafica.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,15 +16,16 @@ public class EdizioneCorso {
     @Column(name = "anno_accademico")
     private String annoAccademico;
 
+    @ManyToOne
+    @JoinColumn(name = "corso")
+    private Corso corso;
+
     @JoinTable(
             name = "edizione_corso_professori",
             joinColumns = @JoinColumn(name = "edizione_corso"),
             inverseJoinColumns = @JoinColumn(name = "professore"))
-    private Set<Professore> professore = new HashSet<>();
+    private List<Professore> professore = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "corso")
-    private Corso corso;
     public Integer getId() {
         return id;
     }
@@ -47,11 +50,11 @@ public class EdizioneCorso {
         this.corso = corso;
     }
 
-    public void setProfessoreSet(Set<Professore> professoreSet) {
-        this.professore = professoreSet;
+    public List<Professore> getProfessore() {
+        return professore;
     }
 
-    public Set<Professore> getProfessoreSet() {
-        return professore;
+    public void setProfessore(List<Professore> professore) {
+        this.professore = professore;
     }
 }
