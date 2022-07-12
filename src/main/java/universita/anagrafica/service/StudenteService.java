@@ -66,4 +66,20 @@ public class StudenteService {
     public void deleteStudente(Integer matricola) {
         studenteRepository.deleteById(matricola);
     }
+
+    public void attivaStudente(Integer matricola) {
+        studenteRepository.findById(matricola).ifPresent(s-> {
+            if(!s.getAttivo())
+                s.setAttivo(true);
+        });
+    }
+
+    public void laureaStudente(Integer matricola) {
+        studenteRepository.findById(matricola).ifPresent(s-> {
+            if(!s.getLaureato()){
+                s.setLaureato(true);
+                s.setAttivo(false);
+            }
+        });
+    }
 }

@@ -165,4 +165,11 @@
                                  referencedColumnNames="matricola"/>
     </changeSet>
 
+    <changeSet id="addColumnStudenteAttivoLaureato" author="">
+        <addColumn tableName="studente">
+            <column name="attivo" type="boolean" defaultValue="false"/>
+            <column name="laureato" type="boolean" defaultValue="false"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
