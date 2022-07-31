@@ -50,8 +50,8 @@ public class StudenteController {
     }
 
     @PutMapping(value = "/update-studente-attivo/{matricola}/", consumes = "application/json")
-    public ResponseEntity<String> attivaStudente(@PathVariable Integer matricola){
-        studenteService.attivaStudente(matricola);
+    public ResponseEntity<String> attivaStudente(@PathVariable Integer matricola, @RequestBody Integer corsoDiLaurea){
+        studenteService.attivaStudente(matricola, corsoDiLaurea);
         return ResponseEntity.ok().body("Studente + " + matricola + " attivato.");
     }
 
