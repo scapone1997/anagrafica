@@ -85,7 +85,7 @@ public class StudenteService {
 
     public void attivaStudente(Integer matricola, Integer corsoDiLaurea) {
         studenteRepository.findById(matricola).ifPresent(s-> {
-            if(!s.getAttivo()){
+            if(s.getAttivo() == null || s.getAttivo() == false){
                 LibrettoVuoto librettoVuoto = inizializza(matricola, corsoDiLaurea);
                 try{
                     String result = esamiClient.caricaLibretto(librettoVuoto).getBody();
