@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import universita.anagrafica.client.extClient.LibrettoVuoto;
 
 
@@ -12,5 +13,5 @@ import universita.anagrafica.client.extClient.LibrettoVuoto;
 public interface EsamiClient {
 
     @PostMapping("/carica-libretto")
-    ResponseEntity<String> caricaLibretto(LibrettoVuoto librettoVuoto) throws Exception;
+    ResponseEntity<String> caricaLibretto(@RequestBody LibrettoVuoto librettoVuoto) throws Exception;
 }

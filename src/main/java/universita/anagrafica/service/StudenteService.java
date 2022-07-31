@@ -9,6 +9,7 @@ import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.kafka.Producer;
 import universita.anagrafica.mapper.StudenteMapper;
+import universita.anagrafica.repository.CorsoDiLaureaRepository;
 import universita.anagrafica.repository.CorsoRepository;
 import universita.anagrafica.repository.StudenteRepository;
 
@@ -30,12 +31,15 @@ public class StudenteService {
 
     private final CorsoRepository corsoRepository;
 
-    public StudenteService(StudenteRepository studenteRepository, Producer producer, StudenteMapper studenteMapper, EsamiClient esamiClient, CorsoRepository corsoRepository) {
+    private final CorsoDiLaureaRepository corsoDiLaureaRepository;
+
+    public StudenteService(StudenteRepository studenteRepository, Producer producer, StudenteMapper studenteMapper, EsamiClient esamiClient, CorsoRepository corsoRepository, CorsoDiLaureaRepository corsoDiLaureaRepository) {
         this.studenteRepository = studenteRepository;
         this.producer = producer;
         this.studenteMapper = studenteMapper;
         this.esamiClient = esamiClient;
         this.corsoRepository = corsoRepository;
+        this.corsoDiLaureaRepository = corsoDiLaureaRepository;
     }
 
     public void saveStudente(StudenteDTO studenteDTO) {
@@ -82,10 +86,13 @@ public class StudenteService {
     public void attivaStudente(Integer matricola, Integer corsoDiLaurea) {
         studenteRepository.findById(matricola).ifPresent(s-> {
             if(!s.getAttivo()){
-                s.setAttivo(true);
                 LibrettoVuoto librettoVuoto = inizializza(matricola, corsoDiLaurea);
                 try{
-                    esamiClient.caricaLibretto(librettoVuoto);
+                    String result = esamiClient.caricaLibretto(librettoVuoto).getBody();
+                    if(result.equals("ok")){
+                        s.setAttivo(true);
+                        studenteRepository.save(s);
+                    }
                 }catch(Exception e){
                     System.out.println("Lanciata eccezione esamiClient(): " + e.getClass());
                 }
@@ -106,7 +113,8 @@ public class StudenteService {
         LibrettoVuoto librettoVuoto = new LibrettoVuoto();
         librettoVuoto.setMatricola(matricola);
         List<EsameObbligatorio> listEsami = new ArrayList<>();
-        List<Corso> corsoList = corsoRepository.findByCorsoDiLaurea(corsoDiLaurea);
+        List<Corso> corsoList = corsoRepository
+                .findByCorsoDiLaureaAndObbligatorio(corsoDiLaureaRepository.findById(corsoDiLaurea).get(), true);
         corsoList.forEach(c->{
             EsameObbligatorio esameObbligatorio = new EsameObbligatorio();
             esameObbligatorio.setId(c.getId());
