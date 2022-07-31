@@ -1,11 +1,12 @@
 package universita.anagrafica.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "studente")
-public class Studente extends Persona{
+public class Studente extends Persona implements Serializable {
 
     @Id
     private Integer matricola;

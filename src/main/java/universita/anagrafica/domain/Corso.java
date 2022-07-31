@@ -1,10 +1,11 @@
 package universita.anagrafica.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "corso")
-public class Corso {
+public class Corso implements Serializable {
 
     @Id
     private Integer id;

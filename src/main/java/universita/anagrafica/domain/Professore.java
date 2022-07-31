@@ -1,18 +1,26 @@
 package universita.anagrafica.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "professore")
-public class Professore extends Persona{
+public class Professore extends Persona implements Serializable {
     @Id
     private Integer matricola;
+
+    @ManyToMany(mappedBy = "professore")
+    @JsonIgnore
+    private Set<EdizioneCorso> edizioneCorso = new HashSet<>();
 
     public Professore(){
 
@@ -30,4 +38,11 @@ public class Professore extends Persona{
         this.matricola = matricola;
     }
 
+    public Set<EdizioneCorso> getEdizioneCorso() {
+        return edizioneCorso;
+    }
+
+    public void setEdizioneCorso(Set<EdizioneCorso> edizioneCorso) {
+        this.edizioneCorso = edizioneCorso;
+    }
 }
