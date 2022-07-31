@@ -1,13 +1,20 @@
 package universita.anagrafica.service;
 
 import org.springframework.stereotype.Service;
+import universita.anagrafica.client.EsamiClient;
+import universita.anagrafica.client.extClient.EsameObbligatorio;
+import universita.anagrafica.client.extClient.LibrettoVuoto;
+import universita.anagrafica.domain.Corso;
 import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.kafka.Producer;
 import universita.anagrafica.mapper.StudenteMapper;
+import universita.anagrafica.repository.CorsoDiLaureaRepository;
+import universita.anagrafica.repository.CorsoRepository;
 import universita.anagrafica.repository.StudenteRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,10 +27,19 @@ public class StudenteService {
 
     private final StudenteMapper studenteMapper;
 
-    public StudenteService(StudenteRepository studenteRepository, Producer producer, StudenteMapper studenteMapper) {
+    private final EsamiClient esamiClient;
+
+    private final CorsoRepository corsoRepository;
+
+    private final CorsoDiLaureaRepository corsoDiLaureaRepository;
+
+    public StudenteService(StudenteRepository studenteRepository, Producer producer, StudenteMapper studenteMapper, EsamiClient esamiClient, CorsoRepository corsoRepository, CorsoDiLaureaRepository corsoDiLaureaRepository) {
         this.studenteRepository = studenteRepository;
         this.producer = producer;
         this.studenteMapper = studenteMapper;
+        this.esamiClient = esamiClient;
+        this.corsoRepository = corsoRepository;
+        this.corsoDiLaureaRepository = corsoDiLaureaRepository;
     }
 
     public void saveStudente(StudenteDTO studenteDTO) {
@@ -67,10 +83,20 @@ public class StudenteService {
         studenteRepository.deleteById(matricola);
     }
 
-    public void attivaStudente(Integer matricola) {
+    public void attivaStudente(Integer matricola, Integer corsoDiLaurea) {
         studenteRepository.findById(matricola).ifPresent(s-> {
-            if(!s.getAttivo())
-                s.setAttivo(true);
+            if(!s.getAttivo()){
+                LibrettoVuoto librettoVuoto = inizializza(matricola, corsoDiLaurea);
+                try{
+                    String result = esamiClient.caricaLibretto(librettoVuoto).getBody();
+                    if(result.equals("ok")){
+                        s.setAttivo(true);
+                        studenteRepository.save(s);
+                    }
+                }catch(Exception e){
+                    System.out.println("Lanciata eccezione esamiClient(): " + e.getClass());
+                }
+            }
         });
     }
 
@@ -81,5 +107,21 @@ public class StudenteService {
                 s.setAttivo(false);
             }
         });
+    }
+
+    private LibrettoVuoto inizializza(Integer matricola, Integer corsoDiLaurea) {
+        LibrettoVuoto librettoVuoto = new LibrettoVuoto();
+        librettoVuoto.setMatricola(matricola);
+        List<EsameObbligatorio> listEsami = new ArrayList<>();
+        List<Corso> corsoList = corsoRepository
+                .findByCorsoDiLaureaAndObbligatorio(corsoDiLaureaRepository.findById(corsoDiLaurea).get(), true);
+        corsoList.forEach(c->{
+            EsameObbligatorio esameObbligatorio = new EsameObbligatorio();
+            esameObbligatorio.setId(c.getId());
+            esameObbligatorio.setNome(c.getNome());
+            listEsami.add(esameObbligatorio);
+        });
+        librettoVuoto.setEsami(listEsami);
+        return librettoVuoto;
     }
 }
