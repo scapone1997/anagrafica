@@ -79,8 +79,19 @@ public class StudenteService {
         }else throw new RuntimeException("Operazione non consentita.");
     }
 
-    public void deleteStudente(Integer matricola) {
-        studenteRepository.deleteById(matricola);
+    public void deleteStudente(Integer matricola) throws Exception{
+        studenteRepository.findById(matricola).ifPresent(s->{
+            if(s.getAttivo() != null){
+                try {
+                    String result = esamiClient.eliminaLibretto(matricola).getBody();
+                    if(result.equals("ok")){
+                        studenteRepository.deleteById(matricola);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException("Errore nel contattare esami: " + e.getClass());
+                }
+            }
+        });
     }
 
     public void attivaStudente(Integer matricola, Integer corsoDiLaurea) {
@@ -91,10 +102,11 @@ public class StudenteService {
                     String result = esamiClient.caricaLibretto(librettoVuoto).getBody();
                     if(result.equals("ok")){
                         s.setAttivo(true);
+                        s.setCorsoDiLaurea(corsoDiLaureaRepository.findById(corsoDiLaurea).get());
                         studenteRepository.save(s);
                     }
                 }catch(Exception e){
-                    System.out.println("Lanciata eccezione esamiClient(): " + e.getClass());
+                    System.out.println("Lanciata eccezione: " + e.getClass());
                 }
             }
         });
