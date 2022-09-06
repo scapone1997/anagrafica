@@ -63,7 +63,12 @@ public class StudenteController {
 
     @DeleteMapping(value = "/delete-studente/{matricola}")
     public ResponseEntity<String> deleteStudente(@PathVariable Integer matricola){
-        studenteService.deleteStudente(matricola);
+        try {
+            studenteService.deleteStudente(matricola);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body("Errore nel server.");
+        }
         return ResponseEntity.ok().body("Studente " + matricola + " eliminato. ");
     }
 
