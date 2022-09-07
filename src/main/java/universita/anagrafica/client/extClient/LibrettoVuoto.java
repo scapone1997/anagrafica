@@ -1,9 +1,11 @@
 package universita.anagrafica.client.extClient;
 
 
+import universita.anagrafica.kafka.Messaggio;
+
 import java.util.List;
 
-public class LibrettoVuoto {
+public class LibrettoVuoto extends Messaggio {
     private Integer matricola;
     private List<EsameObbligatorio> esami;
 
@@ -21,5 +23,13 @@ public class LibrettoVuoto {
 
     public void setEsami(List<EsameObbligatorio> esami) {
         this.esami = esami;
+    }
+
+    @Override
+    public String toString() {
+        return "LibrettoVuoto{" +
+                "matricola=" + matricola +
+                ", esami=" + esami +
+                '}';
     }
 }

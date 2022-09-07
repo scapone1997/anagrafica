@@ -100,14 +100,14 @@ public class StudenteService {
                 LibrettoVuoto librettoVuoto = inizializza(matricola, corsoDiLaurea);
                 try{
                     String result = esamiClient.caricaLibretto(librettoVuoto).getBody();
-                    if(result.equals("ok")){
-                        s.setAttivo(true);
-                        s.setCorsoDiLaurea(corsoDiLaureaRepository.findById(corsoDiLaurea).get());
-                        studenteRepository.save(s);
-                    }
                 }catch(Exception e){
                     System.out.println("Lanciata eccezione: " + e.getClass());
+                    librettoVuoto.setCodice("attivaStudente");
+                    producer.sendMessaggio(librettoVuoto);
                 }
+                s.setAttivo(true);
+                s.setCorsoDiLaurea(corsoDiLaureaRepository.findById(corsoDiLaurea).get());
+                studenteRepository.save(s);
             }
         });
     }
