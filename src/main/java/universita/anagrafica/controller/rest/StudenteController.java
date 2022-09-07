@@ -8,6 +8,7 @@ import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.service.StudenteService;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -76,6 +77,21 @@ public class StudenteController {
             return ResponseEntity.badRequest().body("Errore nel server.");
         }
         return ResponseEntity.ok().body("Studente " + matricola + " eliminato. ");
+    }
+
+    @PostMapping(value = "/prenota-studente/{matricola}/{edizioneCorso}", consumes = "application/json")
+    public ResponseEntity<String> prenotaStudente(@PathVariable Integer matricola,
+                                                  @PathVariable Integer edizioneCorso,
+                                                  @RequestBody Date dataAppello){
+        String result = null;
+        try {
+            result = studenteService.prenotaStudente(matricola, edizioneCorso, dataAppello);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body("Prenotazione non andata a buon fine.");
+        }
+        return ResponseEntity.ok().body(result);
+
     }
 
 }
