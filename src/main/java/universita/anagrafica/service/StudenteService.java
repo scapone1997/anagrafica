@@ -94,8 +94,8 @@ public class StudenteService {
         });
     }
 
-    public void attivaStudente(Integer matricola, Integer corsoDiLaurea) {
-        studenteRepository.findById(matricola).ifPresent(s-> {
+    public void attivaStudente(Integer matricola, Integer corsoDiLaurea) throws Exception {
+        studenteRepository.findById(matricola).ifPresentOrElse(s-> {
             if(s.getAttivo() == null || s.getAttivo() == false){
                 LibrettoVuoto librettoVuoto = inizializza(matricola, corsoDiLaurea);
                 try{
@@ -109,7 +109,7 @@ public class StudenteService {
                 s.setCorsoDiLaurea(corsoDiLaureaRepository.findById(corsoDiLaurea).get());
                 studenteRepository.save(s);
             }
-        });
+        }, ()->{throw new RuntimeException("Studente non presente nel DB.");});
     }
 
     public void laureaStudente(Integer matricola) {
