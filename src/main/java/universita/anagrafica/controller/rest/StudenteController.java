@@ -1,6 +1,7 @@
 package universita.anagrafica.controller.rest;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import universita.anagrafica.dto.StudenteDTO;
@@ -51,7 +52,12 @@ public class StudenteController {
 
     @PutMapping(value = "/update-studente-attivo/{matricola}", consumes = "application/json")
     public ResponseEntity<String> attivaStudente(@PathVariable Integer matricola, @RequestBody Integer corsoDiLaurea){
-        studenteService.attivaStudente(matricola, corsoDiLaurea);
+        try {
+            studenteService.attivaStudente(matricola, corsoDiLaurea);
+        } catch (Exception e) {
+            System.out.println("Lanciata eccezione: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
         return ResponseEntity.ok().body("Studente + " + matricola + " attivato.");
     }
 
