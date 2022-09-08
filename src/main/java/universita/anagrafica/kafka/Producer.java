@@ -23,7 +23,7 @@ public class Producer{
             String key = messaggio.getCodice();
             String value = objectMapper.writeValueAsString(messaggio);
             sendResult = kafkaTemplate.sendDefault(key, value).get();
-            System.out.println("Messaggio: " + messaggio.toString() + " invviato a Kafka.");
+            System.out.println("Messaggio: " + messaggio.toString() + " inviato a Kafka.");
         }catch(Exception e){
             System.out.println("Eccezione lanciata nel send Kafka: " + e.getClass());
         }
