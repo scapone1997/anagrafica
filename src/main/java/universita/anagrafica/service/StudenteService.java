@@ -145,26 +145,24 @@ public class StudenteService {
         return librettoVuoto;
     }
 
-    public String prenotaStudente(Integer matricola, Integer edizioneCorso, Date dataAppello) throws Exception{
+    public ControlloCorsoStudente prenotaStudente(Integer matricola, Integer edizioneCorso, Date dataAppello) throws Exception{
         ControlloCorsoStudente controlloCorsoStudente = new ControlloCorsoStudente();
         controlloCorsoStudente.setStudente(matricola);
         EdizioneCorso edizioneCorsoDB = edizioneCorsoRepository.findById(edizioneCorso).get();
         controlloCorsoStudente.setCorso(edizioneCorsoDB.getCorso().getId());
-        Boolean esiste = esamiClient.isCorsoNonVerbalizzato(controlloCorsoStudente).getBody();
-        if(esiste){
-            Prenotazione prenotazione = new Prenotazione();
-            prenotazione.setStudente(matricola);
-            prenotazione.setEdizioneCorso(edizioneCorso);
-            prenotazione.setDataAppello(dataAppello);
-            prenotazione.setNome(corsoRepository.findById(edizioneCorsoDB.getCorso().getId()).get().getNome());
-            prenotazione.setCodice("prenotaStudente");
-            prenotazione.setCorso(edizioneCorsoDB.getCorso().getId());
-            try {
-                esamiClient.prenotaStudente(prenotazione);
-            } catch (Exception e) {
-                producer.sendMessaggio(prenotazione);
-            }
+        //Boolean esiste = esamiClient.isCorsoNonVerbalizzato(controlloCorsoStudente).getBody();
+        Prenotazione prenotazione = new Prenotazione();
+        prenotazione.setStudente(matricola);
+        prenotazione.setEdizioneCorso(edizioneCorso);
+        prenotazione.setDataAppello(dataAppello);
+        prenotazione.setNome(corsoRepository.findById(edizioneCorsoDB.getCorso().getId()).get().getNome());
+        prenotazione.setCodice("prenotaStudente");
+        prenotazione.setCorso(edizioneCorsoDB.getCorso().getId());
+        try {
+               producer.sendMessaggio(prenotazione);
+        } catch (Exception e) {
+            throw new Exception("Errore nell'inviare messaggio prenotazione a Kafka. ");
         }
-        return "ok";
+        return controlloCorsoStudente;
     }
 }
