@@ -11,9 +11,6 @@ import universita.anagrafica.client.extClient.ControlloCorsoStudente;
 import universita.anagrafica.client.extClient.LibrettoVuoto;
 import universita.anagrafica.client.extClient.Prenotazione;
 
-import java.net.CacheRequest;
-
-
 @Component
 @FeignClient(url = "${esami.ribbon.listOfServers}/api", name = "esami")
 public interface EsamiClient {
@@ -25,7 +22,7 @@ public interface EsamiClient {
     ResponseEntity<String> eliminaLibretto(Integer matricola) throws Exception;
 
     @GetMapping("/esiste-corso-non-verbalizzato")
-    ResponseEntity<Boolean> isCorsoNonVerbalizzato(@RequestBody ControlloCorsoStudente corsoStudente);
+    ResponseEntity<Boolean> isCorsoNonVerbalizzato(@RequestBody ControlloCorsoStudente corsoStudente) throws Exception;
 
     @PostMapping("/prenota-studente")
     ResponseEntity<String> prenotaStudente(@RequestBody Prenotazione prenotazione);
