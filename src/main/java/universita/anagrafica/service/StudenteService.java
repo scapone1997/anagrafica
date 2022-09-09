@@ -2,19 +2,24 @@ package universita.anagrafica.service;
 
 import org.springframework.stereotype.Service;
 import universita.anagrafica.client.EsamiClient;
+import universita.anagrafica.client.extClient.ControlloCorsoStudente;
 import universita.anagrafica.client.extClient.EsameObbligatorio;
 import universita.anagrafica.client.extClient.LibrettoVuoto;
+import universita.anagrafica.client.extClient.Prenotazione;
 import universita.anagrafica.domain.Corso;
+import universita.anagrafica.domain.EdizioneCorso;
 import universita.anagrafica.domain.Studente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.kafka.Producer;
 import universita.anagrafica.mapper.StudenteMapper;
 import universita.anagrafica.repository.CorsoDiLaureaRepository;
 import universita.anagrafica.repository.CorsoRepository;
+import universita.anagrafica.repository.EdizioneCorsoRepository;
 import universita.anagrafica.repository.StudenteRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,13 +38,16 @@ public class StudenteService {
 
     private final CorsoDiLaureaRepository corsoDiLaureaRepository;
 
-    public StudenteService(StudenteRepository studenteRepository, Producer producer, StudenteMapper studenteMapper, EsamiClient esamiClient, CorsoRepository corsoRepository, CorsoDiLaureaRepository corsoDiLaureaRepository) {
+    private final EdizioneCorsoRepository edizioneCorsoRepository;
+
+    public StudenteService(StudenteRepository studenteRepository, Producer producer, StudenteMapper studenteMapper, EsamiClient esamiClient, CorsoRepository corsoRepository, CorsoDiLaureaRepository corsoDiLaureaRepository, EdizioneCorsoRepository edizioneCorsoRepository) {
         this.studenteRepository = studenteRepository;
         this.producer = producer;
         this.studenteMapper = studenteMapper;
         this.esamiClient = esamiClient;
         this.corsoRepository = corsoRepository;
         this.corsoDiLaureaRepository = corsoDiLaureaRepository;
+        this.edizioneCorsoRepository = edizioneCorsoRepository;
     }
 
     public void saveStudente(StudenteDTO studenteDTO) {
@@ -135,5 +143,26 @@ public class StudenteService {
         });
         librettoVuoto.setEsami(listEsami);
         return librettoVuoto;
+    }
+
+    public ControlloCorsoStudente prenotaStudente(Integer matricola, Integer edizioneCorso, Date dataAppello) throws Exception{
+        ControlloCorsoStudente controlloCorsoStudente = new ControlloCorsoStudente();
+        controlloCorsoStudente.setStudente(matricola);
+        EdizioneCorso edizioneCorsoDB = edizioneCorsoRepository.findById(edizioneCorso).get();
+        controlloCorsoStudente.setCorso(edizioneCorsoDB.getCorso().getId());
+        //Boolean esiste = esamiClient.isCorsoNonVerbalizzato(controlloCorsoStudente).getBody();
+        Prenotazione prenotazione = new Prenotazione();
+        prenotazione.setStudente(matricola);
+        prenotazione.setEdizioneCorso(edizioneCorso);
+        prenotazione.setDataAppello(dataAppello);
+        prenotazione.setNome(corsoRepository.findById(edizioneCorsoDB.getCorso().getId()).get().getNome());
+        prenotazione.setCodice("prenotaStudente");
+        prenotazione.setCorso(edizioneCorsoDB.getCorso().getId());
+        try {
+               producer.sendMessaggio(prenotazione);
+        } catch (Exception e) {
+            throw new Exception("Errore nell'inviare messaggio prenotazione a Kafka. ");
+        }
+        return controlloCorsoStudente;
     }
 }

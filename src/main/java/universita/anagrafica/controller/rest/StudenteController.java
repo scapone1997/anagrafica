@@ -4,10 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import universita.anagrafica.client.extClient.ControlloCorsoStudente;
 import universita.anagrafica.dto.StudenteDTO;
 import universita.anagrafica.service.StudenteService;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -76,6 +78,19 @@ public class StudenteController {
             return ResponseEntity.badRequest().body("Errore nel server.");
         }
         return ResponseEntity.ok().body("Studente " + matricola + " eliminato. ");
+    }
+
+    @PostMapping(value = "/prenota-studente/{matricola}/{edizioneCorso}", consumes = "application/json")
+    public ResponseEntity<?> prenotaStudente(@PathVariable Integer matricola,
+                                                                  @PathVariable Integer edizioneCorso,
+                                                                  @RequestBody Date dataAppello){
+        try {
+            ControlloCorsoStudente controlloCorsoStudente = studenteService.prenotaStudente(matricola, edizioneCorso, dataAppello);
+            return ResponseEntity.ok().body(controlloCorsoStudente);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body("Prenotazione non andata a buon fine.");
+        }
     }
 
 }
