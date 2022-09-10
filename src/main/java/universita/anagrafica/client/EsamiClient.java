@@ -19,8 +19,7 @@ public interface EsamiClient {
     @DeleteMapping("/elimina-libretto")
     ResponseEntity<String> eliminaLibretto(Integer matricola) throws Exception;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/esiste-corso-non-verbalizzato")
-    @Headers(value = "Content-Type: application/json")
+    @PostMapping("/esiste-corso-non-verbalizzato")
     ResponseEntity<Boolean> isCorsoNonVerbalizzato(@RequestBody ControlloCorsoStudente corsoStudente) throws Exception;
 
     @PostMapping("/prenota-studente")

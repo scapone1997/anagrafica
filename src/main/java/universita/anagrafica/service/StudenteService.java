@@ -147,21 +147,35 @@ public class StudenteService {
 
     public ControlloCorsoStudente prenotaStudente(Integer matricola, Integer edizioneCorso, Date dataAppello) throws Exception{
         ControlloCorsoStudente controlloCorsoStudente = new ControlloCorsoStudente();
+        Prenotazione prenotazione = new Prenotazione();
         controlloCorsoStudente.setStudente(matricola);
         EdizioneCorso edizioneCorsoDB = edizioneCorsoRepository.findById(edizioneCorso).get();
         controlloCorsoStudente.setCorso(edizioneCorsoDB.getCorso().getId());
-        //Boolean esiste = esamiClient.isCorsoNonVerbalizzato(controlloCorsoStudente).getBody();
-        Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setStudente(matricola);
-        prenotazione.setEdizioneCorso(edizioneCorso);
-        prenotazione.setDataAppello(dataAppello);
-        prenotazione.setNome(corsoRepository.findById(edizioneCorsoDB.getCorso().getId()).get().getNome());
-        prenotazione.setCodice("prenotaStudente");
-        prenotazione.setCorso(edizioneCorsoDB.getCorso().getId());
+        Boolean nonEsiste = null;
         try {
-               producer.sendMessaggio(prenotazione);
+            nonEsiste = esamiClient.isCorsoNonVerbalizzato(controlloCorsoStudente).getBody();
         } catch (Exception e) {
-            throw new Exception("Errore nell'inviare messaggio prenotazione a Kafka. ");
+            System.out.println("Non riesco a contattare Esami.");
+        }
+        if (nonEsiste) {
+            prenotazione.setStudente(matricola);
+            prenotazione.setEdizioneCorso(edizioneCorso);
+            prenotazione.setDataAppello(dataAppello);
+            prenotazione.setNome(corsoRepository.findById(edizioneCorsoDB.getCorso().getId()).get().getNome());
+            prenotazione.setCodice("prenotaStudente");
+            prenotazione.setCorso(edizioneCorsoDB.getCorso().getId());
+            try {
+                   esamiClient.prenotaStudente(prenotazione);
+                System.out.println("Messaggio" + prenotazione + " inviato a Esami.");
+            } catch (Exception e) {
+                System.out.println("Non riesco a contattare Esami.");
+                try {
+                    producer.sendMessaggio(prenotazione);
+                } catch (Exception ex) {
+                    System.out.println("Non riesco a scrivere su Kafka.");
+                    throw new RuntimeException(ex);
+                }
+            }
         }
         return controlloCorsoStudente;
     }
