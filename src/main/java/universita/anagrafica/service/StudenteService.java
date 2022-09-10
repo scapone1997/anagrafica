@@ -151,7 +151,7 @@ public class StudenteService {
         controlloCorsoStudente.setStudente(matricola);
         EdizioneCorso edizioneCorsoDB = edizioneCorsoRepository.findById(edizioneCorso).get();
         controlloCorsoStudente.setCorso(edizioneCorsoDB.getCorso().getId());
-        Boolean nonEsiste = null;
+        Boolean nonEsiste = true;
         try {
             nonEsiste = esamiClient.isCorsoNonVerbalizzato(controlloCorsoStudente).getBody();
         } catch (Exception e) {
