@@ -165,7 +165,7 @@ public class StudenteService {
             prenotazione.setCodice("prenotaStudente");
             prenotazione.setCorso(edizioneCorsoDB.getCorso().getId());
             try {
-                   esamiClient.prenotaStudente(prenotazione);
+                esamiClient.prenotaStudente(prenotazione);
                 System.out.println("Messaggio" + prenotazione + " inviato a Esami.");
             } catch (Exception e) {
                 System.out.println("Non riesco a contattare Esami.");
