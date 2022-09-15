@@ -2,6 +2,7 @@ package universita.anagrafica.service;
 
 import org.springframework.stereotype.Service;
 import universita.anagrafica.domain.Corso;
+import universita.anagrafica.domain.CorsoDiLaurea;
 import universita.anagrafica.dto.CorsoDTO;
 import universita.anagrafica.mapper.CorsoMapper;
 import universita.anagrafica.repository.CorsoDiLaureaRepository;
@@ -43,5 +44,14 @@ public class CorsoService {
 
     public void deleteCorso(Integer id) {
         corsoRepository.deleteById(id);
+    }
+
+    public List<CorsoDTO> corsiPerCorsoDiLaurea(String corsoDiLaurea) {
+        CorsoDiLaurea corsoDiLaureaDB = corsoDiLaureaRepository.findByNome(corsoDiLaurea).get();
+        corsoRepository
+                .findAll()
+                .stream()
+                .filter(c->c.getCorsoDiLaurea().equals(corsoDiLaureaDB))
+                .collect(Collectors.toList());
     }
 }

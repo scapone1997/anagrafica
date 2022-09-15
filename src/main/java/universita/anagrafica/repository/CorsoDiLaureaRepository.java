@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CorsoDiLaureaRepository extends JpaRepository<CorsoDiLaurea, Integer> {
     Optional<CorsoDiLaurea> findById(Integer id);
+
+    Optional<CorsoDiLaurea> findByNome(String corsoDiLaurea);
 }

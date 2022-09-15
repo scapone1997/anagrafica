@@ -34,4 +34,9 @@ public class CorsoController {
         corsoService.deleteCorso(id);
         return ResponseEntity.ok().body("Corso " + id + " eliminato. ");
     }
+
+    @GetMapping(value = "/corsi/{corsoDiLaurea}")
+    public ResponseEntity<List<CorsoDTO>> corsiPerCorsoDiLaurea(@PathVariable String corsoDiLaurea){
+        return ResponseEntity.ok().body(corsoService.corsiPerCorsoDiLaurea(corsoDiLaurea));
+    }
 }

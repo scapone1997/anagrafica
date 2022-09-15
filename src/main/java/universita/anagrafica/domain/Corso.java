@@ -1,5 +1,7 @@
 package universita.anagrafica.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -8,12 +10,14 @@ import java.io.Serializable;
 public class Corso implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nome;
     private Boolean obbligatorio;
 
     @ManyToOne
     @JoinColumn(name = "corso_di_laurea")
+    @JsonIgnoreProperties("corsi")
     private CorsoDiLaurea corsoDiLaurea;
 
     public Integer getId() {
