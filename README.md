@@ -6,7 +6,7 @@ Pullare immagine mysql
 
 Eseguire un container contenente un database:
 
-`docker run --name universita -e MYSQL_ROOT_PASSWORD=ciao -d mysql`
+`docker run --name universita -e MYSQL_ROOT_PASSWORD=ciao -d --publish 3306:3306 mysql`
 
 Entrare dentro container mysql
 
