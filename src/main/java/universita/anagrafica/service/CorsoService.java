@@ -48,10 +48,11 @@ public class CorsoService {
 
     public List<CorsoDTO> corsiPerCorsoDiLaurea(String corsoDiLaurea) {
         CorsoDiLaurea corsoDiLaureaDB = corsoDiLaureaRepository.findByNome(corsoDiLaurea).get();
-        corsoRepository
+        return corsoRepository
                 .findAll()
                 .stream()
                 .filter(c->c.getCorsoDiLaurea().equals(corsoDiLaureaDB))
+                .map(corso -> corsoMapper.toDto(corso))
                 .collect(Collectors.toList());
     }
 }

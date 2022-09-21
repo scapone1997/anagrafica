@@ -166,10 +166,37 @@
     </changeSet>
 
     <changeSet id="addColumnStudenteAttivoLaureato" author="">
-        <addColumn tableName="studente">
-            <column name="attivo" type="boolean" defaultValue="false"/>
-            <column name="laureato" type="boolean" defaultValue="false"/>
-        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="addTasseStudenti" author="">
+        <createTable tableName="tasse">
+            <column name="id" type="integer">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="importo_base" type="double">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="descrizione" type="integer">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="pagata" type="boolean">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="scaduta" type="boolean">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="data_scadenza" type="boolean">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="importo_reale" type="double"/>
+            <column name="studente" type="integer"/>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="tasse"
+                                 baseColumnNames="studente"
+                                 constraintName="fk_studente_tasse"
+                                 referencedTableName="studente"
+                                 referencedColumnNames="matricola"/>
     </changeSet>
 
 </databaseChangeLog>
