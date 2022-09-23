@@ -16,11 +16,6 @@ public class Collaboratore extends Persona implements Serializable {
 
     }
 
-    public Collaboratore(String nome, String cognome, LocalDate dataNascita, Character sesso, String luogoNascita, Integer codice) {
-        super(nome, cognome, dataNascita, sesso, luogoNascita);
-        this.codice = codice;
-    }
-
     public Integer getCodice() {
         return codice;
     }

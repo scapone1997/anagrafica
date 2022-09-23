@@ -25,10 +25,6 @@ public class Professore extends Persona implements Serializable {
     public Professore(){
 
     }
-    public Professore(String nome, String cognome, LocalDate dataNascita, Character sesso, String luogoNascita, Integer matricola) {
-        super(nome, cognome, dataNascita, sesso, luogoNascita);
-        this.matricola = matricola;
-    }
 
     public Integer getMatricola() {
         return matricola;

@@ -25,10 +25,6 @@ public class Studente extends Persona implements Serializable {
     public Studente(){
 
     }
-    public Studente(String nome, String cognome, LocalDate dataNascita, Character sesso, String luogoNascita, Integer matricola){
-        super(nome, cognome, dataNascita, sesso, luogoNascita);
-        this.matricola = matricola;
-    }
 
     public Integer getMatricola() {
         return matricola;
