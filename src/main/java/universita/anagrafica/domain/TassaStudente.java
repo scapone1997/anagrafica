@@ -1,16 +1,18 @@
 package universita.anagrafica.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tasse")
 public class TassaStudente extends Tassa{
 
     @ManyToOne
+    @JoinColumn(name = "studente")
     private Studente studente;
+
+    @ManyToOne
+    @JoinColumn(name = "studente_non_immatricolato")
+    private StudenteNonImmatricolato studenteNonImmatricolato;
 
     @Column(name = "importo_reale")
     private Double importoReale;

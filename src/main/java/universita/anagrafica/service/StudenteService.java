@@ -111,7 +111,7 @@ public class StudenteService {
                 }catch(Exception e){
                     System.out.println("Lanciata eccezione: " + e.getClass());
                     librettoVuoto.setCodice("attivaStudente");
-                    producer.sendMessaggio(librettoVuoto);
+                    producer.sendMessaggio(librettoVuoto, "studenti");
                 }
                 s.setAttivo(true);
                 s.setCorsoDiLaurea(corsoDiLaureaRepository.findById(corsoDiLaurea).get());
@@ -170,7 +170,7 @@ public class StudenteService {
             } catch (Exception e) {
                 System.out.println("Non riesco a contattare Esami.");
                 try {
-                    producer.sendMessaggio(prenotazione);
+                    producer.sendMessaggio(prenotazione, "prenotazioni");
                 } catch (Exception ex) {
                     System.out.println("Non riesco a scrivere su Kafka.");
                     throw new RuntimeException(ex);

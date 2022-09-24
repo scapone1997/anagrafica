@@ -6,13 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "studente")
-public class Studente extends Persona implements Serializable {
-
-    @Id
-    private Integer matricola;
-
-    @Column(name = "anno_accademico_iscrizione")
-    private String annoAccademicoIscrizione;
+public class Studente extends StudenteNonImmatricolato implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "corso_di_laurea")
@@ -25,29 +19,12 @@ public class Studente extends Persona implements Serializable {
     public Studente(){
 
     }
-
-    public Integer getMatricola() {
-        return matricola;
-    }
-
-    public void setMatricola(Integer matricola) {
-        this.matricola = matricola;
-    }
-
     public CorsoDiLaurea getCorsoDiLaurea() {
         return corsoDiLaurea;
     }
 
     public void setCorsoDiLaurea(CorsoDiLaurea corsoDiLaurea) {
         this.corsoDiLaurea = corsoDiLaurea;
-    }
-
-    public String getAnnoAccademicoIscrizione() {
-        return annoAccademicoIscrizione;
-    }
-
-    public void setAnnoAccademicoIscrizione(String annoAccademicoIscrizione) {
-        this.annoAccademicoIscrizione = annoAccademicoIscrizione;
     }
 
     public Boolean getAttivo() {
@@ -64,14 +41,5 @@ public class Studente extends Persona implements Serializable {
 
     public void setLaureato(Boolean laureato) {
         this.laureato = laureato;
-    }
-
-    @Override
-    public String toString() {
-        return "Studente{" +
-                "matricola=" + matricola +
-                ", annoAccademicoIscrizione='" + annoAccademicoIscrizione + '\'' +
-                ", corsoDiLaurea=" + corsoDiLaurea +
-                '}';
     }
 }

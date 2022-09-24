@@ -17,13 +17,13 @@ public class Producer{
     @Autowired
     ObjectMapper objectMapper;
 
-    public SendResult<String, String> sendMessaggio(Messaggio messaggio) {
+    public SendResult<String, String> sendMessaggio(Messaggio messaggio, String topic) {
         SendResult<String, String> sendResult = null;
         try{
             String key = messaggio.getCodice();
             String value = objectMapper.writeValueAsString(messaggio);
-            sendResult = kafkaTemplate.sendDefault(key, value).get();
-            System.out.println("Messaggio: " + messaggio.toString() + " inviato a Kafka.");
+            sendResult = kafkaTemplate.send(topic, value).get();
+            System.out.println("Messaggio: " + messaggio.toString() + " inviato a Kafka sul topic " + topic);
         }catch(Exception e){
             System.out.println("Eccezione lanciata nel send Kafka: " + e.getClass());
         }

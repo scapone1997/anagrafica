@@ -8,8 +8,8 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 
-        <changeSet id="tableStudente" author="Capone.s">
-            <createTable tableName="studente">
+        <changeSet id="tableStudentNon" author="Capone.s">
+            <createTable tableName="studente_non_immatricolato">
                 <column name="matricola" type="integer">
                     <constraints nullable="false" primaryKey="true"></constraints>
                 </column>
@@ -30,6 +30,29 @@
                 </column>
             </createTable>
         </changeSet>
+
+    <changeSet id="tableStudente" author="Capone.s">
+        <createTable tableName="studente">
+            <column name="matricola" type="integer">
+                <constraints nullable="false" primaryKey="true"></constraints>
+            </column>
+            <column name="nome" type="varchar(100)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="cognome" type="varchar(100)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="data_nascita" type="date">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="sesso" type="varchar(1)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="luogo_nascita" type="varchar(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
 
     <changeSet id="tableProfessore" author="Capone.s">
         <createTable tableName="professore">
