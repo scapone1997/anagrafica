@@ -165,7 +165,7 @@
                                  referencedColumnNames="matricola"/>
     </changeSet>
 
-    <changeSet id="addColumnStudenteAttivoLaureato" author="">
+    <changeSet id="addColumnStudenteAttivoLaureato" author="capone.s">
         <addColumn tableName="studente">
             <column name="attivo" type="boolean" defaultValue="false"/>
             <column name="laureato" type="boolean" defaultValue="false"/>
